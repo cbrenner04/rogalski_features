@@ -1,0 +1,5 @@
+.idea
+.DS_Store
+spec/env.rb
+spec/screenshots/
+spec/reports/
