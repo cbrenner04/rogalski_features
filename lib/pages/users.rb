@@ -10,11 +10,10 @@ class Users
     has_css?('h1', text: 'List of Users')
   end
 
-  def has_user?(user)
-    has_css?('tr', text: user)
-  end
-
-  def has_participant?(user, display_name, study_id)
-    [user, display_name, study_id].each { |text| has_user?(text) }
+  def has_user?(hash)
+    hash.default = ''
+    [hash[:email], hash[:display_name], hash[:study_id]].each do |text|
+      has_css?('tr', text: text)
+    end
   end
 end

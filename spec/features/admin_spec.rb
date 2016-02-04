@@ -11,54 +11,58 @@ feature 'Admin' do
 
   scenario 'Admin views current users' do
     users.open
-    expect(users).to have_user(ENV['Admin'])
+    user = { email: ENV['Admin'] }
+    expect(users).to have_user(user)
   end
 
   scenario 'Admin creates another admin' do
     users.open
     add_new_user.open
-    add_new_user.create_admin('fake@example.com', 'password')
-    expect(users).to have_user('fake@example.com')
+    admin = { email: 'fake@example.com', password: 'password' }
+    add_new_user.create_admin(admin)
+    expect(users).to have_user(admin)
   end
 
   scenario 'Admin creates a participant' do
     users.open
     add_new_user.open
-    add_new_user
-      .create_participant('participant_1@example.com', 'Participant 1',
-                          'password', 'pt1', '202-555-0163', Date.today)
+    participant = { email: 'participant_1@example.com',
+                    display_name: 'Participant 1', password: 'password',
+                    study_id: 'pt1', phone: '202-555-0163',
+                    start_date: Date.today }
+    add_new_user.create_participant(participant)
     users.assert_on_page
-    expect(users)
-      .to have_participant('participant_1@example.com', 'Participant 1', 'pt1')
+    expect(users).to have_user(participant)
   end
 
   scenario 'Admin adds an assignment to a participant' do
     users.open
     edit_user.open_for('preload_pt_1')
-    edit_user
-      .create_assignment('New assignment', 'preload_pt_1', 'Assignment Body')
+    assignment = { title: 'New assignment', participant: 'preload_pt_1',
+                   instructions: 'Assignment Body' }
+    edit_user.create_assignment(assignment)
     user_info.open_for('preload_pt_1')
-    expect(user_info).to have_assignment('New assignment')
+    expect(user_info).to have_assignment(assignment)
   end
 
   scenario 'Admin schedules a session with a participant' do
     users.open
     edit_user.open_for('preload_pt_2')
-    date = Date.today + 1
-    time = Time.now + 1
-    edit_user
-      .sched_session('New session', date, Time.now, date, time,
-                     'Session Instructions')
+    session = { title: 'New session', start_date: Date.today + 1,
+                start_time: Time.now, end_date: Date.today + 1,
+                end_time: Time.now + 1, instructions: 'Session Instructions' }
+    edit_user.schedule_session(session)
     user_info.open_for('preload_pt_2')
-    expect(user_info).to have_session('New session')
+    expect(user_info).to have_session(session)
   end
 
   scenario 'Admin assigns a video to a participant' do
     users.open
     edit_user.open_for('preload_pt_3')
-    edit_user.assign_video('fake/url/', 'New Video', 'Video description',
-                           'Video resource')
+    video = { video_url: 'fake/url/', title: 'New Video',
+              description: 'Video description', resource: 'Video resource' }
+    edit_user.assign_video(video)
     user_info.open_for('preload_pt_3')
-    expect(user_info).to have_video('New Video')
+    expect(user_info).to have_video(video)
   end
 end
