@@ -1,5 +1,6 @@
-# page object for user info page
+# page object
 class Users
+  # for user info page
   class Info
     include Capybara::DSL
 

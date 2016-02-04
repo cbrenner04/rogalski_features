@@ -5,7 +5,6 @@ require 'selenium-webdriver'
 require 'capybara/rspec'
 require 'capybara-screenshot/rspec'
 
-
 # RSpec configuration options
 RSpec.configure do |config|
   config.full_backtrace = false

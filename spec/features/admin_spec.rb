@@ -2,37 +2,51 @@
 
 feature 'Admin' do
   background do
-    home.log_in_as(ENV['Admin'], ENV['Admin_Password'])
+    home.log_in_as(generic_admin)
   end
 
   scenario 'Admin logs in successfully' do
-    expect(admin).to be_visible
+    expect(admin_home).to be_visible
   end
 
   scenario 'Admin views current users' do
     users.open
-    user = { email: ENV['Admin'] }
-    expect(users).to have_user(user)
+    expect(users).to have_user(generic_admin)
   end
 
   scenario 'Admin creates another admin' do
     users.open
     add_new_user.open
-    admin = { email: 'fake@example.com', password: 'password' }
-    add_new_user.create_admin(admin)
-    expect(users).to have_user(admin)
+    new_admin = { email: 'fake@example.com', password: 'password' }
+    add_new_user.create_admin(new_admin)
+    expect(users).to have_user(new_admin)
+
+    # checks new user has proper permissions
+    admin_home.log_out
+    home.log_in_as(new_admin)
+    expect(admin_home).to be_visible
+
+    admin_home.visit_participants
+    expect(participant_home).to be_visible
   end
 
   scenario 'Admin creates a participant' do
     users.open
     add_new_user.open
-    participant = { email: 'participant_1@example.com',
-                    display_name: 'Participant 1', password: 'password',
-                    study_id: 'pt1', phone: '202-555-0163',
-                    start_date: Date.today }
-    add_new_user.create_participant(participant)
+    new_participant = { email: 'participant_1@example.com',
+                        display_name: 'Participant 1', password: 'password',
+                        study_id: 'pt1', phone: '202-555-0163',
+                        start_date: Date.today }
+    add_new_user.create_participant(new_participant)
     users.assert_on_page
-    expect(users).to have_user(participant)
+    expect(users).to have_user(new_participant)
+
+    # checks new participant has proper permissions
+    admin_home.log_out
+    home.log_in_as(new_participant)
+    expect(participant_home).to be_visible
+
+    expect { admin_home.visit_admin }.to raise_error(Capybara::ElementNotFound)
   end
 
   scenario 'Admin adds an assignment to a participant' do

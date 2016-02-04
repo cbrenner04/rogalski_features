@@ -1,5 +1,6 @@
-# page object for editing user information
+# page object
 class Users
+  # for editing user information
   class Edit
     include Capybara::DSL
 

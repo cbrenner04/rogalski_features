@@ -1,5 +1,6 @@
-# Page object for Users Add New page
+# Page object
 class Users
+  # for Users Add New page
   class AddNew
     include Capybara::DSL
 
@@ -26,7 +27,9 @@ class Users
 
     def make_admin
       find('legend', text: 'Make admin').click
-      find('input[type = checkbox]').click
+      sleep(1)
+      check 'Is admin'
+      sleep(1)
     end
 
     def create_admin(hash)

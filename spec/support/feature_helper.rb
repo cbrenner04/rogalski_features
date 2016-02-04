@@ -7,8 +7,8 @@ def home
   @home ||= Home.new
 end
 
-def admin
-  @admin ||= Admin.new
+def admin_home
+  @admin_home ||= Home::Admin.new
 end
 
 def users
@@ -25,4 +25,8 @@ end
 
 def user_info
   @user_info ||= Users::Info.new
+end
+
+def participant_home
+  @participant_home ||= Home::Participant.new
 end
