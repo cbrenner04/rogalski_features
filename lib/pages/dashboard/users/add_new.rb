@@ -14,17 +14,17 @@ class Dashboard
         find('legend', text: 'Personal information').click
       end
 
-      def fill_in_pers_info(hash)
-        hash.default = ''
-        fill_in 'user[email]', with: hash[:email]
-        fill_in 'user[display_name]', with: hash[:display_name]
-        fill_in 'user[password]', with: hash[:password]
-        fill_in 'user[password_confirmation]', with: hash[:password]
-        fill_in 'user[study_identity]', with: hash[:study_id]
+      def fill_in_pers_info(user)
+        user.default = ''
+        fill_in 'user[email]', with: user[:email]
+        fill_in 'user[display_name]', with: user[:display_name]
+        fill_in 'user[password]', with: user[:password]
+        fill_in 'user[password_confirmation]', with: user[:password]
+        fill_in 'user[study_identity]', with: user[:study_id]
         click_on 'Add a new Contact'
-        fill_in 'user[contact_attributes][email]', with: hash[:email]
-        fill_in 'user[contact_attributes][phone]', with: hash[:phone]
-        find('.hasDatepicker').set(hash[:start_date])
+        fill_in 'user[contact_attributes][email]', with: user[:email]
+        fill_in 'user[contact_attributes][phone]', with: user[:phone]
+        find('.hasDatepicker').set(user[:start_date])
       end
 
       def make_admin
@@ -34,16 +34,16 @@ class Dashboard
         sleep(1)
       end
 
-      def create_admin(hash)
+      def create_admin(user)
         open_personal_information
-        fill_in_pers_info(hash)
+        fill_in_pers_info(user)
         make_admin
         click_on 'Save'
       end
 
-      def create_participant(hash)
+      def create_participant(user)
         open_personal_information
-        fill_in_pers_info(hash)
+        fill_in_pers_info(user)
         click_on 'Save'
       end
     end

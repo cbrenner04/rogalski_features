@@ -8,8 +8,8 @@ class Dashboard
       find('.nav-list').find('a', text: 'Videos').click
     end
 
-    def has_video?(hash)
-      [hash[:video_url], hash[:title]].each { |i| has_css?('tr', text: i) }
+    def has_video?(video)
+      [video[:video_url], video[:title]].each { |i| has_css?('tr', text: i) }
     end
   end
 end

@@ -10,35 +10,41 @@ class Dashboard
         find('tr', text: user).find('.icon-pencil').click
       end
 
-      def create_assignment(hash)
+      def open_assignments_tab
         find('legend', text: 'Assignments').click
         sleep(1)
+      end
+
+      def create_assignment(assignment)
         click_on 'Add a new Assignment'
-        first('input').set(hash[:title])
+        first('input').set(assignment[:title])
         first('.input-append').find('.ui-icon').click
-        pt_links = page.all('a', text: hash[:participant])
-        pt_links[1].click
+        find('.ui-autocomplete')
+          .find('a', text: assignment[:participant]).click
         within_frame(find('.wysihtml5-sandbox')) do
-          find('body').set(hash[:instructions])
+          find('body').set(assignment[:instructions])
         end
+      end
+
+      def save
         click_on 'Save'
       end
 
-      def schedule_session(hash)
+      def schedule_session(session)
         find('legend', text: 'Schedule session').click
         sleep(1)
         click_on 'Add a new Calendar event'
         sleep(1)
         within('.modal') do
-          fill_in 'calendar_event[title]', with: hash[:title]
+          fill_in 'calendar_event[title]', with: session[:title]
           date_pickers = page.all('.hasDatepicker')
           time_pickers = page.all('.hasTimepicker')
-          date_pickers[0].set(hash[:start_date])
-          time_pickers[0].set(hash[:start_time])
-          date_pickers[1].set(hash[:end_date])
-          time_pickers[1].set(hash[:end_time])
+          date_pickers[0].set(session[:start_date])
+          time_pickers[0].set(session[:start_time])
+          date_pickers[1].set(session[:end_date])
+          time_pickers[1].set(session[:end_time])
           within_frame(find('.wysihtml5-sandbox')) do
-            find('body').set(hash[:instructions])
+            find('body').set(session[:instructions])
           end
           find('.modal-header-title').click
           click_on 'Save'
@@ -47,15 +53,15 @@ class Dashboard
         click_on 'Save'
       end
 
-      def assign_video(hash)
+      def assign_video(video)
         find('legend', text: 'Assign videos').click
         click_on 'Add a new Video'
         sleep(1)
         within('.modal') do
-          fill_in 'video[url]', with: hash[:video_url]
-          fill_in 'video[title]', with: hash[:title]
-          fill_in 'video[description]', with: hash[:description]
-          fill_in 'video[resource]', with: hash[:resource]
+          fill_in 'video[url]', with: video[:video_url]
+          fill_in 'video[title]', with: video[:title]
+          fill_in 'video[description]', with: video[:description]
+          fill_in 'video[resource]', with: video[:resource]
           click_on 'Save'
         end
         sleep(1)

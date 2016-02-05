@@ -10,16 +10,16 @@ class Dashboard
         find('tr', text: participant).find('.icon-info-sign').click
       end
 
-      def has_assignment?(hash)
-        find('.well', text: hash[:title])
+      def has_assignment?(assignment)
+        find('.well', text: assignment[:title])
       end
 
-      def has_session?(hash)
-        find('.well', text: hash[:title])
+      def has_session?(session)
+        find('.well', text: session[:title])
       end
 
-      def has_video?(hash)
-        find('.well', text: hash[:title])
+      def has_video?(video)
+        find('.well', text: video[:title])
       end
     end
   end

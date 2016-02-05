@@ -50,3 +50,11 @@ end
 def participant_videos
   @participant_videos ||= Home::Participants::Videos.new
 end
+
+def audio_decks
+  @audio_decks ||= Dashboard::AudioDecks.new
+end
+
+def participant_exercises
+  @participant_exercises ||= Home::Participants::Exercises.new
+end

@@ -52,9 +52,11 @@ feature 'Admin' do
   scenario 'Admin adds an assignment to a participant' do
     users.open
     edit_user.open_for('preload_pt_1')
+    edit_user.open_assignments_tab
     assignment = { title: 'New assignment', participant: 'preload_pt_1',
                    instructions: 'Assignment Body' }
     edit_user.create_assignment(assignment)
+    edit_user.save
     user_info.open_for('preload_pt_1')
     expect(user_info).to have_assignment(assignment)
 

@@ -10,11 +10,13 @@ class Dashboard
         find('.nav-list').find('a', text: 'Assignments').click
       end
 
-      def has_assignment?(hash)
-        [hash[:participant], hash[:title]].each { |i| has_css?('tr', text: i) }
-        find('tr', text: hash[:participant]).has_css?('.badge-success')
-        find('tr', text: hash[:participant]).has_css?('td', text: 'new')
-        find('tr', text: hash[:participant])
+      def has_assignment?(assignment)
+        [assignment[:participant], assignment[:title]].each do |i|
+          has_css?('tr', text: i)
+        end
+        find('tr', text: assignment[:participant]).has_css?('.badge-success')
+        find('tr', text: assignment[:participant]).has_css?('td', text: 'new')
+        find('tr', text: assignment[:participant])
           .has_css?('.completed_field', text: '-')
       end
     end
