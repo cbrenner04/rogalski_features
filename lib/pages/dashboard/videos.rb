@@ -1,5 +1,5 @@
 # page object
-class Users
+class Dashboard
   # for videos page
   class Videos
     include Capybara::DSL

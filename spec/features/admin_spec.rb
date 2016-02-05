@@ -2,11 +2,11 @@
 
 feature 'Admin' do
   background do
-    home.log_in_as(generic_admin)
+    log_in.log_in_as(generic_admin)
   end
 
   scenario 'Admin logs in successfully' do
-    expect(admin_home).to be_visible
+    expect(dashboard).to be_visible
   end
 
   scenario 'Admin views current users' do
@@ -22,12 +22,12 @@ feature 'Admin' do
     expect(users).to have_user(new_admin)
 
     # checks new user has proper permissions
-    admin_home.log_out
-    home.log_in_as(new_admin)
-    expect(admin_home).to be_visible
+    dashboard.log_out
+    log_in.log_in_as(new_admin)
+    expect(dashboard).to be_visible
 
-    admin_home.visit_participants
-    expect(participant_home).to be_visible
+    dashboard.visit_participants
+    expect(home).to be_visible
   end
 
   scenario 'Admin creates a participant' do
@@ -42,11 +42,11 @@ feature 'Admin' do
     expect(users).to have_user(new_participant)
 
     # checks new participant has proper permissions
-    admin_home.log_out
-    home.log_in_as(new_participant)
-    expect(participant_home).to be_visible
+    dashboard.log_out
+    log_in.log_in_as(new_participant)
+    expect(home).to be_visible
 
-    expect { admin_home.visit_admin }.to raise_error(Capybara::ElementNotFound)
+    expect { dashboard.visit_admin }.to raise_error(Capybara::ElementNotFound)
   end
 
   scenario 'Admin adds an assignment to a participant' do
@@ -63,10 +63,10 @@ feature 'Admin' do
     expect(user_assignments).to have_assignment(assignment)
 
     # sign in as participant and check for assignment
-    admin_home.log_out
-    home.log_in_as(preload_pt_1)
+    dashboard.log_out
+    log_in.log_in_as(preload_pt_1)
     assignment[:status] = '.not-complete'
-    expect(participant_home).to have_assignment(assignment)
+    expect(participants).to have_assignment(assignment)
   end
 
   scenario 'Admin schedules a session with a participant' do
@@ -86,8 +86,8 @@ feature 'Admin' do
     expect(user_calendar_events).to have_event(session)
 
     # sign in as participant and check for session
-    admin_home.log_out
-    home.log_in_as(preload_pt_2)
+    dashboard.log_out
+    log_in.log_in_as(preload_pt_2)
     participants.open_session
     expect(participants).to have_session(session)
   end
@@ -106,8 +106,8 @@ feature 'Admin' do
     expect(user_videos).to have_video(video)
 
     # sign in as participant and check for video
-    admin_home.log_out
-    home.log_in_as(preload_pt_3)
+    dashboard.log_out
+    log_in.log_in_as(preload_pt_3)
     participant_videos.open
     expect(participant_videos).to have_video(video)
   end

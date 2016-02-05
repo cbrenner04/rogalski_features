@@ -3,50 +3,50 @@
 # require and instantiate page object
 Dir['./lib/pages/**/*.rb'].each { |file| require file }
 
+def log_in
+  @log_in ||= LogIn.new
+end
+
 def home
   @home ||= Home.new
 end
 
-def admin_home
-  @admin_home ||= Home::Admin.new
+def dashboard
+  @dashboard ||= Dashboard.new
 end
 
 def users
-  @users ||= Users.new
+  @users ||= Dashboard::Users.new
 end
 
 def add_new_user
-  @add_new_user ||= Users::AddNew.new
+  @add_new_user ||= Dashboard::Users::AddNew.new
 end
 
 def edit_user
-  @edit_user ||= Users::Edit.new
+  @edit_user ||= Dashboard::Users::Edit.new
 end
 
 def user_info
-  @user_info ||= Users::Info.new
-end
-
-def participant_home
-  @participant_home ||= Home::Participant.new
+  @user_info ||= Dashboard::Users::Info.new
 end
 
 def user_assignments
-  @user_assignments ||= Users::Assignments.new
+  @user_assignments ||= Dashboard::Users::Assignments.new
 end
 
 def user_calendar_events
-  @user_calendar_events ||= Users::CalendarEvents.new
+  @user_calendar_events ||= Dashboard::Users::CalendarEvents.new
 end
 
 def user_videos
-  @user_videos ||= Users::Videos.new
+  @user_videos ||= Dashboard::Videos.new
 end
 
 def participants
-  @participants ||= Participants.new
+  @participants ||= Home::Participants.new
 end
 
 def participant_videos
-  @participant_videos ||= Participants::Videos.new
+  @participant_videos ||= Home::Participants::Videos.new
 end

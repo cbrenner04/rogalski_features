@@ -2,10 +2,7 @@
 class Home
   include Capybara::DSL
 
-  def log_in_as(hash)
-    visit ENV['Base_URL']
-    fill_in 'user[email]', with: hash[:email]
-    fill_in 'user[password]', with: hash[:password]
-    click_on 'Sign In'
+  def visible?
+    has_css?('h4', text: 'Welcome to Communication Bridge')
   end
 end
