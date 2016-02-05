@@ -30,3 +30,23 @@ end
 def participant_home
   @participant_home ||= Home::Participant.new
 end
+
+def user_assignments
+  @user_assignments ||= Users::Assignments.new
+end
+
+def user_calendar_events
+  @user_calendar_events ||= Users::CalendarEvents.new
+end
+
+def user_videos
+  @user_videos ||= Users::Videos.new
+end
+
+def participants
+  @participants ||= Participants.new
+end
+
+def participant_videos
+  @participant_videos ||= Participants::Videos.new
+end

@@ -13,7 +13,7 @@ class Home
     end
 
     def visit_admin
-      click_on 'Dashboard'
+      click_on 'Admin'
     end
 
     def log_out

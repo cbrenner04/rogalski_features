@@ -57,6 +57,16 @@ feature 'Admin' do
     edit_user.create_assignment(assignment)
     user_info.open_for('preload_pt_1')
     expect(user_info).to have_assignment(assignment)
+
+    # check assignments tab for new assignment
+    user_assignments.open
+    expect(user_assignments).to have_assignment(assignment)
+
+    # sign in as participant and check for assignment
+    admin_home.log_out
+    home.log_in_as(preload_pt_1)
+    assignment[:status] = '.not-complete'
+    expect(participant_home).to have_assignment(assignment)
   end
 
   scenario 'Admin schedules a session with a participant' do
@@ -64,10 +74,22 @@ feature 'Admin' do
     edit_user.open_for('preload_pt_2')
     session = { title: 'New session', start_date: Date.today + 1,
                 start_time: Time.now, end_date: Date.today + 1,
-                end_time: Time.now + 1, instructions: 'Session Instructions' }
+                end_time: Time.now + (60 * 60),
+                instructions: 'Session Instructions' }
     edit_user.schedule_session(session)
     user_info.open_for('preload_pt_2')
     expect(user_info).to have_session(session)
+
+    # check calendar events for new session
+    user_calendar_events.open
+    session[:participant] = 'preload_pt_2'
+    expect(user_calendar_events).to have_event(session)
+
+    # sign in as participant and check for session
+    admin_home.log_out
+    home.log_in_as(preload_pt_2)
+    participants.open_session
+    expect(participants).to have_session(session)
   end
 
   scenario 'Admin assigns a video to a participant' do
@@ -78,5 +100,15 @@ feature 'Admin' do
     edit_user.assign_video(video)
     user_info.open_for('preload_pt_3')
     expect(user_info).to have_video(video)
+
+    # check videos for new video
+    user_videos.open
+    expect(user_videos).to have_video(video)
+
+    # sign in as participant and check for video
+    admin_home.log_out
+    home.log_in_as(preload_pt_3)
+    participant_videos.open
+    expect(participant_videos).to have_video(video)
   end
 end
