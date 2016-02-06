@@ -1,8 +1,6 @@
-# page object
 class Dashboard
-  # for Users
   class Users
-    # for calendar events
+    # page object for user calendar events
     class CalendarEvents
       include Capybara::DSL
 

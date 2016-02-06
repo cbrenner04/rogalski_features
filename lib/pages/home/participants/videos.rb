@@ -1,8 +1,6 @@
-# page object
 class Home
-  # for Participants
   class Participants
-    # for videos
+    # page object for participant videos
     class Videos
       include Capybara::DSL
 

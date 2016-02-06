@@ -1,8 +1,6 @@
-# page object
 class Dashboard
-  # for Users
   class Users
-    # for editing user information
+    # page object for editing user information
     class Edit
       include Capybara::DSL
 

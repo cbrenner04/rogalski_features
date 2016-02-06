@@ -1,6 +1,5 @@
-# page object
 class Dashboard
-  # for Audio decks
+  # page object for Audio decks
   class AudioDecks
     include Capybara::DSL
 
@@ -13,7 +12,8 @@ class Dashboard
       fill_in 'audio_deck[title]', with: audio_deck[:title]
       edit_user.create_assignment(audio_deck[:assignment])
       page.all('input')[1].set(audio_deck[:title])
-      page.all('.user_field')[1].find('.ra-filtering-select-input')
+      page.all('.user_field')[1]
+        .find('.ra-filtering-select-input')
         .set(audio_deck[:user])
       add_new_card(audio_deck[:audio_card])
       sleep(1)

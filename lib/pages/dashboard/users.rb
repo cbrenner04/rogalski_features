@@ -1,6 +1,5 @@
-# Page object
 class Dashboard
-  # for Users
+  # page object for Users
   class Users
     include Capybara::DSL
 

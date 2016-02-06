@@ -1,8 +1,6 @@
-# page object
 class Dashboard
-  # for Users
   class Users
-    # for assignments page
+    # page object for user assignments page
     class Assignments
       include Capybara::DSL
 

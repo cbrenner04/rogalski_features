@@ -1,13 +1,12 @@
-# page object
 class Home
-  # for Participants
   class Participants
-    # for Exercises
+    # page object for Exercises
     class Exercises
       include Capybara::DSL
 
       def select_exercise(exercise)
-        find('#to-do-list').find('.not-complete', text: exercise[:title])
+        find('#to-do-list')
+          .find('.not-complete', text: exercise[:title])
           .find('.fa-plus-circle').click
       end
 

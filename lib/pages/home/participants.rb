@@ -1,6 +1,5 @@
-# page object
 class Home
-  # for Participants
+  # page object for Participants
   class Participants
     include Capybara::DSL
 
