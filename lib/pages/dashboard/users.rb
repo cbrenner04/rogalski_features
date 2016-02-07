@@ -3,19 +3,91 @@ class Dashboard
   class Users
     include Capybara::DSL
 
+    def initialize(user)
+      user.default = ''
+      @email = user[:email]
+      @display_name = user[:display_name]
+      @password = user[:password]
+      @study_id = user[:study_id]
+      @phone = user[:phone]
+      @start_date = user[:start_date]
+      @assignment = user[:assignment]
+      @session = user[:session]
+      @video = user[:video]
+    end
+
     def open
       find('.icon-user').click
+    end
+
+    def open_add_new_tab
+      click_on 'Add new'
+    end
+
+    def open_personal_information
+      find('legend', text: 'Personal information').click
     end
 
     def assert_on_page
       has_css?('h1', text: 'List of Users')
     end
 
-    def has_user?(user)
-      user.default = ''
-      [user[:email], user[:display_name], user[:study_id]].each do |text|
+    def present?
+      [@email, @display_name, @study_id].each do |text|
         has_css?('tr', text: text)
       end
+    end
+
+    def fill_in_pers_info
+      fill_in 'user[email]', with: @email
+      fill_in 'user[display_name]', with: @display_name
+      fill_in 'user[password]', with: @password
+      fill_in 'user[password_confirmation]', with: @password
+      fill_in 'user[study_identity]', with: @study_id
+      click_on 'Add a new Contact'
+      fill_in 'user[contact_attributes][email]', with: @email
+      fill_in 'user[contact_attributes][phone]', with: @phone
+      find('.hasDatepicker').set(@start_date)
+    end
+
+    def make_admin
+      find('legend', text: 'Make admin').click
+      sleep(1)
+      check 'Is admin'
+      sleep(1)
+    end
+
+    def create_admin
+      open_personal_information
+      fill_in_pers_info
+      make_admin
+      click_on 'Save'
+    end
+
+    def create_participant
+      open_personal_information
+      fill_in_pers_info
+      click_on 'Save'
+    end
+
+    def open_edit_page
+      find('tr', text: @study_id).find('.icon-pencil').click
+    end
+
+    def open_info_page
+      find('tr', text: @study_id).find('.icon-info-sign').click
+    end
+
+    def has_assignment?
+      find('.well', text: @assignment)
+    end
+
+    def has_session?
+      find('.well', text: @session)
+    end
+
+    def has_video?
+      find('.well', text: @video)
     end
   end
 end

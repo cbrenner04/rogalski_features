@@ -4,18 +4,41 @@ class Dashboard
     class Assignments
       include Capybara::DSL
 
+      def initialize(assignment)
+        @title = assignment[:title]
+        @user = assignment[:user]
+        @instructions = assignment[:instructions]
+      end
+
       def open
         find('.nav-list').find('a', text: 'Assignments').click
       end
 
-      def has_assignment?(assignment)
-        [assignment[:participant], assignment[:title]].each do |i|
-          has_css?('tr', text: i)
+      def open_assignments_tab
+        find('legend', text: 'Assignments').click
+        sleep(1)
+      end
+
+      def create_assignment
+        click_on 'Add a new Assignment'
+        first('input').set(@title)
+        first('.input-append').find('.ui-icon').click
+        find('.ui-autocomplete').find('a', text: @user).click
+        within_frame(find('.wysihtml5-sandbox')) do
+          find('body').set(@instructions)
         end
-        find('tr', text: assignment[:participant]).has_css?('.badge-success')
-        find('tr', text: assignment[:participant]).has_css?('td', text: 'new')
-        find('tr', text: assignment[:participant])
-          .has_css?('.completed_field', text: '-')
+      end
+
+      def save
+        click_on 'Save'
+      end
+
+      def present?
+        [@participant, @title].each { |i| has_css?('tr', text: i) }
+        pt_row = find('tr', text: @user)
+        pt_row.has_css?('.badge-success')
+        pt_row.has_css?('td', text: 'new')
+        pt_row.has_css?('.completed_field', text: '-')
       end
     end
   end

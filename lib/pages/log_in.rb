@@ -2,10 +2,15 @@
 class LogIn
   include Capybara::DSL
 
-  def log_in_as(user)
+  def initialize(user)
+    @email = user[:email]
+    @password = user[:password]
+  end
+
+  def sign_in
     visit ENV['Base_URL']
-    fill_in 'user[email]', with: user[:email]
-    fill_in 'user[password]', with: user[:password]
+    fill_in 'user[email]', with: @email
+    fill_in 'user[password]', with: @password
     click_on 'Sign In'
   end
 end
