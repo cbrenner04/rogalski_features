@@ -1,6 +1,5 @@
 # filename: ./spec/support/admin_helper.rb
 
-require './lib/pages/log_in'
 require './lib/pages/dashboard'
 require './lib/pages/home'
 require './lib/pages/dashboard/users'
@@ -12,12 +11,8 @@ require './lib/pages/home/participants/exercises'
 require './lib/pages/home/participants/sessions'
 require './lib/pages/home/participants/videos'
 
-def admin_login
-  LogIn.new(generic_admin)
-end
-
 def dashboard
-  Dashboard.new
+  @dashboard ||= Dashboard.new
 end
 
 def user
@@ -25,40 +20,26 @@ def user
 end
 
 def add_new_user
-  Dashboard::Users::AddNew.new
+  @add_new_user ||= Dashboard::Users::AddNew.new
 end
 
 def home
-  Home.new
-end
-
-def new_admin_creds
-  { email: 'fake@example.com', password: 'password' }
+  @home ||= Home.new
 end
 
 def new_admin
-  Dashboard::Users.new(new_admin_creds)
+  Dashboard::Users.new(email: 'fake@example.com', password: 'password')
 end
 
-def new_admin_login
-  LogIn.new(new_admin_creds)
-end
-
-def new_participant_info
-  { email: 'participant_1@example.com',
+def new_participant
+  Dashboard::Users.new(
+    email: 'participant_1@example.com',
     display_name: 'Participant 1',
     password: 'password',
     study_id: 'pt1',
     phone: '202-555-0163',
-    start_date: Date.today }
-end
-
-def new_participant
-  Dashboard::Users.new(new_participant_info)
-end
-
-def new_participant_login
-  LogIn.new(new_participant_info)
+    start_date: Date.today
+  )
 end
 
 def new_assignment
@@ -70,15 +51,12 @@ def new_assignment
 end
 
 def participant_1
-  Dashboard::Users.new(
-    study_id: 'preload_pt_1',
-    assignment: 'New assignment'
-  )
+  Dashboard::Users.new(preload_pt_1)
 end
 
-def participant_1_login
-  LogIn.new(preload_pt_1)
-end
+# def participant_1_login
+#   LogIn.new(preload_pt_1)
+# end
 
 def participant_exercise
   Home::Participants::Exercises.new(
@@ -88,10 +66,7 @@ def participant_exercise
 end
 
 def participant_2
-  Dashboard::Users.new(
-    study_id: 'preload_pt_2',
-    session: 'New session'
-  )
+  Dashboard::Users.new(preload_pt_2)
 end
 
 def session
@@ -106,10 +81,6 @@ def session
   )
 end
 
-def participant_2_login
-  LogIn.new(preload_pt_2)
-end
-
 def participant_session
   Home::Participants::Sessions.new(
     title: 'New session',
@@ -118,10 +89,7 @@ def participant_session
 end
 
 def participant_3
-  Dashboard::Users.new(
-    study_id: 'preload_pt_3',
-    video: 'New Video'
-  )
+  Dashboard::Users.new(preload_pt_3)
 end
 
 def video
@@ -131,10 +99,6 @@ def video
     description: 'Video description',
     resource: 'Video resource'
   )
-end
-
-def participant_3_login
-  LogIn.new(preload_pt_3)
 end
 
 def participant_video

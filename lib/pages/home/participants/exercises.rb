@@ -47,6 +47,18 @@ class Home
           has_css?('.hint', text: i)
         end
       end
+
+      def start_audio_record
+        click_on 'Press to record Description'
+      end
+
+      def stop_audio_record
+        click_on 'Press when your description is complete.'
+      end
+
+      def finish
+        click_on 'Finish'
+      end
     end
   end
 end

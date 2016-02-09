@@ -16,7 +16,26 @@ class Dashboard
       @video = user[:video]
     end
 
-    def open
+    def sign_in
+      visit ENV['Base_URL']
+      fill_in 'user[email]', with: @email
+      fill_in 'user[password]', with: @password
+      click_on 'Sign In'
+    end
+
+    def log_out
+      click_on 'Log out'
+    end
+
+    def visit_participants
+      click_on 'Home'
+    end
+
+    def visit_admin
+      click_on 'Admin'
+    end
+
+    def open_users
       find('.icon-user').click
     end
 
@@ -70,12 +89,12 @@ class Dashboard
       click_on 'Save'
     end
 
-    def open_edit_page
-      find('tr', text: @study_id).find('.icon-pencil').click
+    def open_edit_page_for(user)
+      find('tr', text: user).find('.icon-pencil').click
     end
 
-    def open_info_page
-      find('tr', text: @study_id).find('.icon-info-sign').click
+    def open_info_page_for(user)
+      find('tr', text: user).find('.icon-info-sign').click
     end
 
     def has_assignment?
