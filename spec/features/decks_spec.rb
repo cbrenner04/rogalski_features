@@ -26,7 +26,7 @@ feature 'Decks' do
     participant_audio_exercise.finish
 
     # complete exercise log at the end of exercise
-    exercise_log.complete # getting hung up here
+    exercise_log.complete
     expect(exercise_log).to be_submitted
     exercise_log.close_modal
     expect(home).to be_visible
@@ -36,5 +36,39 @@ feature 'Decks' do
     admin.sign_in
     admin.open_responses
     expect(audio_response).to be_present
+  end
+
+  scenario 'Admin creates a multisyllabic deck' do
+    admin.sign_in
+    multi_deck.open
+    multi_deck.add_new
+    expect(multi_deck).to be_present
+
+    # sign in as participant and check for multisyllabic deck
+    admin.log_out
+    participant_5.sign_in
+    expect(participant_multi_exercise).to be_present
+
+    # check exercise to confirm multisyllabic deck / cards
+    participant_multi_exercise.select_exercise
+    expect(participant_multi_exercise).to have_instructions
+    participant_multi_exercise.start
+    expect(participant_multi_exercise).to be_a_multi_exercise
+    participant_multi_exercise.start_audio_record
+    sleep(1)
+    participant_multi_exercise.stop_audio_record
+    participant_multi_exercise.finish
+
+    # complete exercise log at the end of exercise
+    exercise_log.complete
+    expect(exercise_log).to be_submitted
+    exercise_log.close_modal
+    expect(home).to be_visible
+
+    # check admin dashboard for data of completed multisyllabic deck
+    participant_5.sign_out
+    admin.sign_in
+    admin.open_responses
+    expect(multi_response).to be_present
   end
 end

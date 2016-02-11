@@ -14,7 +14,7 @@ class Home
         end
         fill_in 'compliance_form[day_practiced]', with: Date.today
         fill_in 'compliance_form[comment]', with: "I wrote this #{Date.today}"
-        find('h2', text: 'Exercise Log for First audio deck').click
+        find('h2', text: 'Exercise Log for').click
         click_on 'Submit Exercise Log'
       end
 

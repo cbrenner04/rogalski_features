@@ -4,17 +4,22 @@ require './lib/pages/dashboard'
 require './lib/pages/home'
 require './lib/pages/dashboard/users'
 require './lib/pages/dashboard/audio_decks'
+require './lib/pages/dashboard/multisyllabic_decks'
 require './lib/pages/dashboard/users/responses'
 require './lib/pages/home/participants'
 require './lib/pages/home/participants/exercises'
 require './lib/pages/home/participants/exercise_log'
 
 def admin
-  @admin = Dashboard::Users.new(generic_admin)
+  @admin ||= Dashboard::Users.new(generic_admin)
 end
 
 def participant_4
-  @participant_4 = Home::Participants.new(preload_pt_4)
+  @participant_4 ||= Home::Participants.new(preload_pt_4)
+end
+
+def participant_5
+  @participant_5 ||= Home::Participants.new(preload_pt_5)
 end
 
 def dashboard
@@ -33,6 +38,16 @@ def audio_deck
   )
 end
 
+def multi_deck
+  Dashboard::MultiDecks.new(
+    title: 'First multisyllabic deck',
+    user: 'preload_pt_5',
+    instructions: 'Multisyllabic Deck Instructions',
+    word: 'antidisestablishmentarianism',
+    spelling: 'an-tee-dis-uh-stab-lish-muh n-tair-ee-uh-niz-uh m'
+  )
+end
+
 def participant_audio_exercise
   Home::Participants::Exercises.new(
     status: 'not-complete',
@@ -41,6 +56,16 @@ def participant_audio_exercise
     hint_1: 'First card Hint 1',
     hint_2: 'First card Hint 2',
     hint_3: 'First card Hint 3'
+  )
+end
+
+def participant_multi_exercise
+  Home::Participants::Exercises.new(
+    status: 'not-complete',
+    title: 'First multisyllabic deck',
+    instructions: 'Multisyllabic Deck Instructions',
+    word: 'antidisestablishmentarianism',
+    spelling: 'an-tee-dis-uh-stab-lish-muh n-tair-ee-uh-niz-uh m'
   )
 end
 
@@ -57,5 +82,13 @@ def audio_response
     user: 'preload_pt_4',
     card: 'First',
     answer: 'Audio Answer [Download]'
+  )
+end
+
+def multi_response
+  Dashboard::Users::Responses.new(
+    user: 'preload_pt_5',
+    card: 'antidisestablishmentarianism',
+    answer: 'Multisyllabic Answer [Download]'
   )
 end

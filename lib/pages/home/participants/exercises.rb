@@ -11,6 +11,8 @@ class Home
         @hint_1 = exercise[:hint_1]
         @hint_2 = exercise[:hint_2]
         @hint_3 = exercise[:hint_3]
+        @word = exercise[:word]
+        @spelling = exercise[:spelling]
       end
 
       def present?
@@ -26,8 +28,8 @@ class Home
 
       def has_instructions?
         within('.col.half.last') do
-          has_css?('.heading', text: @title)
-          has_css?('.wrapper', text: @instructions)
+          find('.heading', text: @title)
+          find('.wrapper', text: @instructions)
         end
       end
 
@@ -37,19 +39,28 @@ class Home
       end
 
       def audio_exercise?
-        has_css?('button', text: 'Press to record Description')
+        find('button', text: 'Hint')
+      end
+
+      def multi_exercise?
+        find('h1', text: @word)
+        find('h2', text: @spelling)
       end
 
       def has_correct_hints?
         [@hint_1, @hint_2, @hint_3].each do |i|
           click_on 'Hint'
           has_no_css?('.hidden', text: i)
-          has_css?('.hint', text: i)
+          find('.hint', text: i)
         end
       end
 
       def start_audio_record
-        click_on 'Press to record Description'
+        if has_css?('button', text: 'Description')
+          click_on 'Press to record Description'
+        else
+          click_on 'Press to record Word'
+        end
       end
 
       def stop_audio_record
