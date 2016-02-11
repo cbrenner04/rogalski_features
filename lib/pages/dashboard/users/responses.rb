@@ -8,10 +8,9 @@ class Dashboard
         find('.nav-list').find('a', text: 'Responses').click
       end
 
-      def has_response?(response)
-        response.default = ''
+      def present?(response)
         [response[:user], response[:card], response[:answer]].each do |i|
-          has_css?('tr', text: i)
+          find('tr', text: i)
         end
       end
     end

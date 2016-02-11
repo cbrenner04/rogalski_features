@@ -34,8 +34,9 @@ feature 'Decks' do
     # check admin dashboard for data of completed audio deck
     participant_4.sign_out
     admin.sign_in
-    resp = { user: 'preload_pt_4', card: 'first',
+    response.open
+    resp = { user: 'preload_pt_4', card: 'First',
              answer: 'Audio Answer [Download]' }
-    expect(response).to have_response(resp)
+    expect(response).to be_present(resp)
   end
 end
