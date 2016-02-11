@@ -52,6 +52,10 @@ def home
   @home ||= Home.new
 end
 
-def response
-  @response ||= Dashboard::Users::Responses.new
+def audio_response
+  Dashboard::Users::Responses.new(
+    user: 'preload_pt_4',
+    card: 'First',
+    answer: 'Audio Answer [Download]'
+  )
 end

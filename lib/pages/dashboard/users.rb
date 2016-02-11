@@ -108,5 +108,9 @@ class Dashboard
     def has_video?
       find('.well', text: @video)
     end
+
+    def open_responses
+      find('.nav-list').find('a', text: 'Responses').click
+    end
   end
 end

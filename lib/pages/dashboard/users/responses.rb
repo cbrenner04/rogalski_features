@@ -4,12 +4,14 @@ class Dashboard
     class Responses
       include Capybara::DSL
 
-      def open
-        find('.nav-list').find('a', text: 'Responses').click
+      def initialize(response)
+        @user = response[:user]
+        @card = response[:card]
+        @answer = response[:answer]
       end
 
-      def present?(response)
-        [response[:user], response[:card], response[:answer]].each do |i|
+      def present?
+        [@user, @card, @answer].each do |i|
           find('tr', text: i)
         end
       end
