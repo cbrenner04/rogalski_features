@@ -14,6 +14,7 @@ class Dashboard
         click_on 'Add a new Multisyllabic card'
         within('#modal') do
           find('.ra-filtering-select-input').set(@user)
+          find('.control-label', text: 'User').click
           fill_in 'multisyllabic_card[word]', with: @word
           fill_in 'multisyllabic_card[phonetic_transcription]',
                   with: @spelling

@@ -91,5 +91,17 @@ feature 'Decks' do
     expect(participant_picture_exercise).to have_correct_picture_hints
     participant_picture_exercise.answer
     participant_picture_exercise.finish
+
+    # complete exercise log at the end of exercise
+    exercise_log.complete
+    expect(exercise_log).to be_submitted
+    exercise_log.close_modal
+    expect(home).to be_visible
+
+    # check admin dashboard for data of completed multisyllabic deck
+    participant_6.sign_out
+    admin.sign_in
+    admin.open_responses
+    expect(picture_response).to be_present
   end
 end

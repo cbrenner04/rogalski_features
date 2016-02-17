@@ -31,6 +31,14 @@ def dashboard
   @dashboard ||= Dashboard.new
 end
 
+def exercise_log
+  @exercise_log ||= Home::Participants::ExerciseLog.new
+end
+
+def home
+  @home ||= Home.new
+end
+
 def audio_deck
   Dashboard::AudioDecks.new(
     title: 'First audio deck',
@@ -97,14 +105,6 @@ def participant_picture_exercise
   )
 end
 
-def exercise_log
-  @exercise_log ||= Home::Participants::ExerciseLog.new
-end
-
-def home
-  @home ||= Home.new
-end
-
 def audio_response
   Dashboard::Users::Responses.new(
     user: 'preload_pt_4',
@@ -118,5 +118,13 @@ def multi_response
     user: 'preload_pt_5',
     card: 'antidisestablishmentarianism',
     answer: 'Multisyllabic Answer [Download]'
+  )
+end
+
+def picture_response
+  Dashboard::Users::Responses.new(
+    user: 'preload_pt_6',
+    card: 'First flash card answer',
+    answer: 'Example Answer'
   )
 end

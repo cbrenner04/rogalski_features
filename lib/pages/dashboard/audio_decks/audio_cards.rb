@@ -16,6 +16,7 @@ class Dashboard
         click_on 'Add a new Audio card'
         within('#modal') do
           find('.ra-filtering-select-input').set(@user)
+          find('.control-label', text: 'User').click
           fill_in 'audio_card[answer]', with: @answer
           fill_in 'audio_card[hint_1]', with: @hint_1
           fill_in 'audio_card[hint_2]', with: @hint_2

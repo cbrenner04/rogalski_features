@@ -28,6 +28,7 @@ class Dashboard
       all('.user_field')[1]
         .find('.ra-filtering-select-input')
         .set(@user)
+      find('.ui-menu-item', text: @user).click
       flash_cards.add_new
       sleep(1)
       click_on 'Save'
