@@ -47,9 +47,21 @@ class Home
         find('h2', text: @spelling)
       end
 
-      def has_correct_hints?
+      def picture_exercise?
+        find('input[placeholder = "Enter the name here"]')
+      end
+
+      def has_correct_audio_hints?
         [@hint_1, @hint_2, @hint_3].each do |i|
           click_on 'Hint'
+          has_no_css?('.hidden', text: i)
+          find('.hint', text: i)
+        end
+      end
+
+      def has_correct_picture_hints?
+        [@hint_1, @hint_2, @hint_3].each do |i|
+          click_on 'Get a hint'
           has_no_css?('.hidden', text: i)
           find('.hint', text: i)
         end
@@ -65,6 +77,11 @@ class Home
 
       def stop_audio_record
         click_on 'Press when your description is complete.'
+      end
+
+      def answer
+        find('input[placeholder = "Enter the name here"]').set('Example Answer')
+        click_on 'Answer'
       end
 
       def finish

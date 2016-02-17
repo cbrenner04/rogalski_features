@@ -5,6 +5,7 @@ require './lib/pages/home'
 require './lib/pages/dashboard/users'
 require './lib/pages/dashboard/audio_decks'
 require './lib/pages/dashboard/multisyllabic_decks'
+require './lib/pages/dashboard/picture_decks'
 require './lib/pages/dashboard/users/responses'
 require './lib/pages/home/participants'
 require './lib/pages/home/participants/exercises'
@@ -20,6 +21,10 @@ end
 
 def participant_5
   @participant_5 ||= Home::Participants.new(preload_pt_5)
+end
+
+def participant_6
+  @participant_6 ||= Home::Participants.new(preload_pt_6)
 end
 
 def dashboard
@@ -48,6 +53,18 @@ def multi_deck
   )
 end
 
+def picture_deck
+  Dashboard::PictureDecks.new(
+    title: 'First picture deck',
+    user: 'preload_pt_6',
+    instructions: 'Picture Deck Instructions',
+    answer: 'First flash card answer',
+    hint_1: 'Flash card hint 1',
+    hint_2: 'Flash card hint 2',
+    hint_3: 'Flash card hint 3'
+  )
+end
+
 def participant_audio_exercise
   Home::Participants::Exercises.new(
     status: 'not-complete',
@@ -66,6 +83,17 @@ def participant_multi_exercise
     instructions: 'Multisyllabic Deck Instructions',
     word: 'antidisestablishmentarianism',
     spelling: 'an-tee-dis-uh-stab-lish-muh n-tair-ee-uh-niz-uh m'
+  )
+end
+
+def participant_picture_exercise
+  Home::Participants::Exercises.new(
+    status: 'not-complete',
+    title: 'First picture deck',
+    instructions: 'Picture Deck Instructions',
+    hint_1: 'Flash card hint 1',
+    hint_2: 'Flash card hint 2',
+    hint_3: 'Flash card hint 3'
   )
 end
 

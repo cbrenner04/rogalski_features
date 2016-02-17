@@ -19,7 +19,7 @@ feature 'Decks' do
     expect(participant_audio_exercise).to have_instructions
     participant_audio_exercise.start
     expect(participant_audio_exercise).to be_an_audio_exercise
-    expect(participant_audio_exercise).to have_correct_hints
+    expect(participant_audio_exercise).to have_correct_audio_hints
     participant_audio_exercise.start_audio_record
     sleep(1)
     participant_audio_exercise.stop_audio_record
@@ -70,5 +70,26 @@ feature 'Decks' do
     admin.sign_in
     admin.open_responses
     expect(multi_response).to be_present
+  end
+
+  scenario 'Admin creates a picture deck' do
+    admin.sign_in
+    picture_deck.open
+    picture_deck.add_new
+    expect(picture_deck).to be_present
+
+    # sign in as participant and check for picture deck
+    admin.log_out
+    participant_6.sign_in
+    expect(participant_picture_exercise).to be_present
+
+    # check exercise to confirm picture deck / flash card
+    participant_picture_exercise.select_exercise
+    expect(participant_picture_exercise).to have_instructions
+    participant_picture_exercise.start
+    expect(participant_picture_exercise).to be_a_picture_exercise
+    expect(participant_picture_exercise).to have_correct_picture_hints
+    participant_picture_exercise.answer
+    participant_picture_exercise.finish
   end
 end
