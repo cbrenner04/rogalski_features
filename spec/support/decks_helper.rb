@@ -16,15 +16,15 @@ def admin
 end
 
 def participant_4
-  @participant_4 ||= Home::Participants.new(preload_pt_4)
+  @participant_4 ||= Home::Participants.new(preload_pt_104)
 end
 
 def participant_5
-  @participant_5 ||= Home::Participants.new(preload_pt_5)
+  @participant_5 ||= Home::Participants.new(preload_pt_105)
 end
 
 def participant_6
-  @participant_6 ||= Home::Participants.new(preload_pt_6)
+  @participant_6 ||= Home::Participants.new(preload_pt_106)
 end
 
 def dashboard
@@ -42,7 +42,7 @@ end
 def audio_deck
   Dashboard::AudioDecks.new(
     title: 'First audio deck',
-    user: 'preload_pt_4',
+    user: 'preload_pt_104',
     instructions: 'Assignment Body',
     answer: 'First',
     hint_1: 'First card Hint 1',
@@ -54,7 +54,7 @@ end
 def multi_deck
   Dashboard::MultiDecks.new(
     title: 'First multisyllabic deck',
-    user: 'preload_pt_5',
+    user: 'preload_pt_105',
     instructions: 'Multisyllabic Deck Instructions',
     word: 'antidisestablishmentarianism',
     spelling: 'an-tee-dis-uh-stab-lish-muh n-tair-ee-uh-niz-uh m'
@@ -64,7 +64,7 @@ end
 def picture_deck
   Dashboard::PictureDecks.new(
     title: 'First picture deck',
-    user: 'preload_pt_6',
+    user: 'preload_pt_106',
     instructions: 'Picture Deck Instructions',
     answer: 'First flash card answer',
     hint_1: 'Flash card hint 1',
@@ -107,7 +107,7 @@ end
 
 def audio_response
   Dashboard::Users::Responses.new(
-    user: 'preload_pt_4',
+    user: 'preload_pt_104',
     card: 'First',
     answer: 'Audio Answer [Download]'
   )
@@ -115,7 +115,7 @@ end
 
 def multi_response
   Dashboard::Users::Responses.new(
-    user: 'preload_pt_5',
+    user: 'preload_pt_105',
     card: 'antidisestablishmentarianism',
     answer: 'Multisyllabic Answer [Download]'
   )
@@ -123,7 +123,7 @@ end
 
 def picture_response
   Dashboard::Users::Responses.new(
-    user: 'preload_pt_6',
+    user: 'preload_pt_106',
     card: 'First flash card answer',
     answer: 'Example Answer'
   )

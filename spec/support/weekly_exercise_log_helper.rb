@@ -10,7 +10,7 @@ def admin
 end
 
 def participant_7
-  @participant_7 ||= Home::Participants.new(preload_pt_7)
+  @participant_7 ||= Home::Participants.new(preload_pt_107)
 end
 
 def pt_weekly_log
@@ -18,5 +18,5 @@ def pt_weekly_log
 end
 
 def user_weekly_log
-  Dashboard::WeeklyExerciseLogs.new('preload_pt_7')
+  Dashboard::WeeklyExerciseLogs.new('preload_pt_107')
 end

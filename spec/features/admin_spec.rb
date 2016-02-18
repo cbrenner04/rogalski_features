@@ -41,11 +41,11 @@ feature 'Admin' do
   end
 
   scenario 'Admin adds an assignment to a participant' do
-    user.open_edit_page_for('preload_pt_1')
+    user.open_edit_page_for('preload_pt_101')
     new_assignment.open_assignments_tab
     new_assignment.create_assignment
     new_assignment.save
-    user.open_info_page_for('preload_pt_1')
+    user.open_info_page_for('preload_pt_101')
     expect(participant_1).to have_assignment
 
     # check assignments tab for new assignment
@@ -59,9 +59,9 @@ feature 'Admin' do
   end
 
   scenario 'Admin schedules a session with a participant' do
-    user.open_edit_page_for('preload_pt_2')
+    user.open_edit_page_for('preload_pt_102')
     session.schedule
-    user.open_info_page_for('preload_pt_2')
+    user.open_info_page_for('preload_pt_102')
     expect(participant_2).to have_session
 
     # check calendar events for new session
@@ -76,9 +76,9 @@ feature 'Admin' do
   end
 
   scenario 'Admin assigns a video to a participant' do
-    user.open_edit_page_for('preload_pt_3')
+    user.open_edit_page_for('preload_pt_103')
     video.assign
-    user.open_info_page_for('preload_pt_3')
+    user.open_info_page_for('preload_pt_103')
     expect(participant_3).to have_video
 
     # check videos for new video

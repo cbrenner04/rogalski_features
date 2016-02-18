@@ -18,5 +18,21 @@ class Home
     def sign_out
       click_on 'SIGN OUT'
     end
+
+    def return_home
+      click_on 'Home'
+    end
+
+    def has_todo_list?
+      has_text? 'To-do list'
+    end
+
+    def has_todo_list_count?(num)
+      if num > 1
+        has_text? "You have #{num} items on your to-do list"
+      else
+        has_text? "You have #{num} item on your to-do list"
+      end
+    end
   end
 end

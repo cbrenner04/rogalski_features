@@ -13,10 +13,6 @@ class Home
       end
 
       def complete
-        exercise = ['Script Training', 'Picture Cards', 
-                    'Auditory Comprehension Strategies',
-                    'Writing Strategies', 'Picture Aids', 'Other']
-        selections = exercise.sample(3)
         selections.each { |s| check s }
         if selections.include? 'Other'
           find('#other-text').set('Some crazy weird task')
@@ -24,21 +20,11 @@ class Home
 
         selections.each do |s|
           within '#details' do
-            now = Date.today
-            sunday = now - now.wday
-            monday = sunday - 6
-            last_week = "#{monday.strftime('%b. %-d, %Y')} - " \
-                        "#{sunday.strftime('%b. %-d, %Y')}"
             find('.exercise-name', text: "#{s} (#{last_week})")
-            element = s.downcase.gsub(' ', '-')
-            within("##{element}", text: "#{s}") do
-              num = exercise.index("#{s}")
-              day = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday',
-                     'saturday', 'sunday'].sample(3)
+            within("##{s.downcase.tr(' ', '-')}", text: s) do
               day.each do |d|
-                find("label[for = 'exercise_log_exercise_log_details_" \
-                     "attributes_#{num}_is_duration_under_30_minutes_#{d}" \
-                     "_false']").click
+                execute_script('window.scrollBy(0, -500)')
+                select_duration(exercise.index(s), d)
               end
             end
           end
@@ -47,6 +33,37 @@ class Home
         choose ['yes', 'no'].sample
         fill_in 'exercise_log[comments]', with: 'Additional Comments'
         click_on 'Submit Exercise Log'
+      end
+
+      private
+
+      def exercise
+        @exercise ||= ['Script Training', 'Picture Cards',
+                       'Auditory Comprehension Strategies',
+                       'Writing Strategies', 'Picture Aids', 'Other']
+      end
+
+      def selections
+        @selections ||= exercise.sample(3)
+      end
+
+      def last_week
+        now = Date.today
+        sunday = now - now.wday
+        monday = sunday - 6
+        @last_week ||= "#{monday.strftime('%b. %-d, %Y')} - " \
+                       "#{sunday.strftime('%b. %-d, %Y')}"
+      end
+
+      def select_duration(num, d)
+        find("label[for = 'exercise_log_exercise_log_details_" \
+             "attributes_#{num}_is_duration_under_30_minutes_#{d}" \
+             "_false']").click
+      end
+
+      def day
+        @day ||= ['monday', 'tuesday', 'wednesday', 'thursday', 'friday',
+                  'saturday', 'sunday'].sample(3)
       end
     end
   end
