@@ -11,7 +11,7 @@ class Dashboard
     end
 
     def open
-      find('.nav-list').find('a', text: 'Videos').click
+      find('.sidebar-nav').find('a', text: 'Videos').click
     end
 
     def assign

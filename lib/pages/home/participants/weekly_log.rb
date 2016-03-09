@@ -13,10 +13,9 @@ class Home
       end
 
       def complete
+        selections = ['New Assignment', 'Other']
         selections.each { |s| check s }
-        if selections.include? 'Other'
-          find('#other-text').set('Some crazy weird task')
-        end
+        find('#other-text').set('Some crazy weird task')
 
         selections.each do |s|
           within '#details' do
@@ -24,7 +23,7 @@ class Home
             within("##{s.downcase.tr(' ', '-')}", text: s) do
               day.each do |d|
                 execute_script('window.scrollBy(0, -500)')
-                select_duration(exercise.index(s), d)
+                select_duration(selections.index(s), d)
               end
             end
           end
@@ -36,16 +35,6 @@ class Home
       end
 
       private
-
-      def exercise
-        @exercise ||= ['Script Training', 'Picture Cards',
-                       'Auditory Comprehension Strategies',
-                       'Writing Strategies', 'Picture Aids', 'Other']
-      end
-
-      def selections
-        @selections ||= exercise.sample(3)
-      end
 
       def last_week
         now = Date.today

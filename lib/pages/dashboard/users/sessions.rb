@@ -22,12 +22,14 @@ class Dashboard
         sleep(1)
         within('.modal') do
           fill_in 'calendar_event[title]', with: @title
-          date_pickers = all('.hasDatepicker')
-          time_pickers = all('.hasTimepicker')
-          date_pickers[0].set(@start_date)
-          time_pickers[0].set(@start_time)
-          date_pickers[1].set(@end_date)
-          time_pickers[1].set(@end_time)
+          # date_pickers = all('.hasDatepicker')
+          # time_pickers = all('.hasTimepicker')
+          # date_pickers[0].set(@start_date)
+          # time_pickers[0].set(@start_time)
+          # date_pickers[1].set(@end_date)
+          # time_pickers[1].set(@end_time)
+          fill_in 'calendar_event[start]', with: @start_date
+          fill_in 'calendar_event[end]', with: @end_date
           within_frame(find('.wysihtml5-sandbox')) do
             find('body').set(@instructions)
           end
@@ -39,7 +41,7 @@ class Dashboard
       end
 
       def open_calendar_events
-        find('.nav-list').find('a', text: 'Calendar events').click
+        find('.sidebar-nav').find('a', text: 'Calendar events').click
       end
 
       def present?

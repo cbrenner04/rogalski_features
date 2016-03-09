@@ -13,29 +13,26 @@ class Home
       end
 
       def switch_to_week
-        find('.fc-button', text: 'week').click
+        find('.fc-agendaWeek-button').click
       end
 
       def has_week?
-        if span_two_months
-          has_css?('h2', text: "#{@sunday.strftime('%b %-d')} — " \
-                               "#{@saturday.strftime('%b %-d %Y')}")
-        else
-          has_css?('h2', text: "#{@sunday.strftime('%b %-d')} — " \
-                               "#{@saturday.strftime('%-d %Y')}")
-        end
+        format = span_two_months ? '%b %-d, %Y' : '%-d, %Y'
+        has_css?('h2', text: "#{@sunday.strftime('%b %-d')} — " \
+                             "#{@saturday.strftime(format)}")
       end
 
       def switch_to_day
-        all('.fc-button', text: 'day')[0].click
+        find('.fc-agendaDay-button').click
       end
 
       def has_day?
-        has_css?('h2', text: Date.today.strftime('%A, %b %-d, %Y'))
+        has_css?('h2', text: Date.today.strftime('%b %-d, %Y'))
+        has_css?('.fc-day-header', text: Date.today.strftime('%A'))
       end
 
       def switch_to_month
-        find('.fc-button', text: 'month').click
+        find('.fc-month-button').click
       end
 
       def has_month?
@@ -57,12 +54,12 @@ class Home
 
       def increment_calendar
         execute_script('window.scrollBy(0, -500)')
-        all('.fc-text-arrow')[1].click
+        find('.fc-next-button').click
       end
 
       def decrement_calendar
         execute_script('window.scrollBy(0, -500)')
-        all('.fc-text-arrow')[0].click
+        find('.fc-prev-button').click
       end
 
       def return_to_today
@@ -95,12 +92,14 @@ class Home
 
       def has_next_day?
         next_day = Date.today + 1
-        has_css?('h2', text: next_day.strftime('%A, %b %-d, %Y'))
+        has_css?('h2', text: next_day.strftime('%b %-d, %Y'))
+        has_css?('.fc-day-header', text: next_day.strftime('%A'))
       end
 
       def has_previous_day?
         prev_day = Date.today - 1
-        has_css?('h2', text: prev_day.strftime('%A, %b %-d, %Y'))
+        has_css?('h2', text: prev_day.strftime('%b %-d, %Y'))
+        has_css?('.fc-day-header', text: prev_day.strftime('%A'))
       end
 
       private

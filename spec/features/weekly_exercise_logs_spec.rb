@@ -5,7 +5,7 @@ require './spec/support/weekly_exercise_log_helper'
 feature 'Weekly Exercise Logs' do
   scenario 'Participant completes a weekly exercise log' do
     participant_7.sign_in
-    expect(participant_7).to have_todo_list_count(1)
+    expect(participant_7).to have_todo_list_count(2)
     pt_weekly_log.open
     pt_weekly_log.start
     pt_weekly_log.complete

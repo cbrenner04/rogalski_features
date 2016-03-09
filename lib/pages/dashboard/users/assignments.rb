@@ -11,7 +11,7 @@ class Dashboard
       end
 
       def open
-        find('.nav-list').find('a', text: 'Assignments').click
+        find('.sidebar-nav').find('a', text: 'Assignments').click
       end
 
       def open_assignments_tab
@@ -22,8 +22,9 @@ class Dashboard
       def create_assignment
         click_on 'Add a new Assignment'
         first('input').set(@title)
-        first('.input-append').find('.ui-icon').click
-        find('.ui-autocomplete').find('a', text: @user).click
+        execute_script('window.scrollBy(0,250)')
+        first('.dropdown-toggle').click
+        find('a', text: @user).click
         within_frame(find('.wysihtml5-sandbox')) do
           find('body').set(@instructions)
         end
@@ -38,7 +39,7 @@ class Dashboard
         pt_row = find('tr', text: @user)
         pt_row.has_css?('.badge-success')
         pt_row.has_css?('td', text: 'new')
-        pt_row.has_css?('.completed_field', text: '-')
+        pt_row.has_css?('.completed_field', text: '‒')
       end
     end
   end

@@ -21,14 +21,10 @@ feature 'Decks' do
     expect(participant_audio_exercise).to be_an_audio_exercise
     expect(participant_audio_exercise).to have_correct_audio_hints
     participant_audio_exercise.start_audio_record
-    sleep(1)
+    sleep(2)
     participant_audio_exercise.stop_audio_record
     participant_audio_exercise.finish
 
-    # complete exercise log at the end of exercise
-    exercise_log.complete
-    expect(exercise_log).to be_submitted
-    exercise_log.close_modal
     expect(home).to be_visible
 
     # check admin dashboard for data of completed audio deck
@@ -55,14 +51,10 @@ feature 'Decks' do
     participant_multi_exercise.start
     expect(participant_multi_exercise).to be_a_multi_exercise
     participant_multi_exercise.start_audio_record
-    sleep(1)
+    sleep(2)
     participant_multi_exercise.stop_audio_record
     participant_multi_exercise.finish
 
-    # complete exercise log at the end of exercise
-    exercise_log.complete
-    expect(exercise_log).to be_submitted
-    exercise_log.close_modal
     expect(home).to be_visible
 
     # check admin dashboard for data of completed multisyllabic deck
@@ -92,10 +84,6 @@ feature 'Decks' do
     participant_picture_exercise.answer
     participant_picture_exercise.finish
 
-    # complete exercise log at the end of exercise
-    exercise_log.complete
-    expect(exercise_log).to be_submitted
-    exercise_log.close_modal
     expect(home).to be_visible
 
     # check admin dashboard for data of completed multisyllabic deck

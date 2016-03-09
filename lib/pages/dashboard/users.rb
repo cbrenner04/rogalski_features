@@ -66,7 +66,7 @@ class Dashboard
       click_on 'Add a new Contact'
       fill_in 'user[contact_attributes][email]', with: @email
       fill_in 'user[contact_attributes][phone]', with: @phone
-      find('.hasDatepicker').set(@start_date)
+      fill_in 'user[start_date]', with: @start_date
     end
 
     def make_admin
@@ -110,7 +110,7 @@ class Dashboard
     end
 
     def open_responses
-      find('.nav-list').find('a', text: 'Responses').click
+      find('.sidebar-nav').find('a', text: 'Responses').click
     end
   end
 end

@@ -17,7 +17,7 @@ class Dashboard
     end
 
     def open
-      find('.nav-list').find('a', text: 'Audio decks').click
+      find('.sidebar-nav').find('a', text: 'Audio decks').click
     end
 
     def add_new
