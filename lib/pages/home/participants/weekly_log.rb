@@ -20,7 +20,7 @@ class Home
         selections.each do |s|
           within '#details' do
             find('.exercise-name', text: "#{s} (#{last_week})")
-            within("##{s.downcase.tr(' ', '-')}", text: s) do
+            within('.exercise-block', text: s) do
               day.each do |d|
                 execute_script('window.scrollBy(0, -500)')
                 select_duration(selections.index(s), d)
@@ -44,10 +44,10 @@ class Home
                        "#{sunday.strftime('%b. %-d, %Y')}"
       end
 
-      def select_duration(num, d)
-        find("label[for = 'exercise_log_exercise_log_details_" \
-             "attributes_#{num}_is_duration_under_30_minutes_#{d}" \
-             "_false']").click
+      def select_duration(num, day)
+        response = [0, '1-30', '30_'].sample
+        find("label[for = 'exercise_log_exercise_log_details_attributes_" \
+             "#{num}_#{day}_duration_#{response}']").click
       end
 
       def day
