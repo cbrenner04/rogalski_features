@@ -28,7 +28,7 @@ class Dashboard
     end
 
     def has_participant_weekly_log_details?
-      has_css?('tr', text: @user, count: 2)
+      has_css?('tr', text: @user, count: 3)
     end
   end
 end

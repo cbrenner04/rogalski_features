@@ -9,7 +9,6 @@ require './lib/pages/dashboard/picture_decks'
 require './lib/pages/dashboard/users/responses'
 require './lib/pages/home/participants'
 require './lib/pages/home/participants/exercises'
-require './lib/pages/home/participants/exercise_log'
 
 def admin
   @admin ||= Dashboard::Users.new(generic_admin)
@@ -29,10 +28,6 @@ end
 
 def dashboard
   @dashboard ||= Dashboard.new
-end
-
-def exercise_log
-  @exercise_log ||= Home::Participants::ExerciseLog.new
 end
 
 def home

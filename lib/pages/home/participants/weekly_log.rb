@@ -12,18 +12,26 @@ class Home
         find('button', text: 'Go To Exercise Log').click
       end
 
+      def has_to_do_list_items?
+        has_css?('.exercise-log-checkbox',
+                 text: "Participant's #1 Assignment (',')") &&
+          has_css?('.exercise-log-checkbox', text:
+                   "Participant's #2 Assignment (',')")
+      end
+
       def complete
-        selections = ['New Assignment', 'Other']
-        selections.each { |s| check s }
+        selections = ["Participant's #1 Assignment (',')",
+                      "Participant's #2 Assignment (',')", 'Other']
+        selections.each { |selection| check selection }
         find('#other-text').set('Some crazy weird task')
 
-        selections.each do |s|
+        selections.each do |selection|
           within '#details' do
-            find('.exercise-name', text: "#{s} (#{last_week})")
-            within('.exercise-block', text: s) do
-              day.each do |d|
+            find('.exercise-name', text: "#{selection} (#{last_week})")
+            within('.exercise-block', text: selection) do
+              days.each do |day|
                 execute_script('window.scrollBy(0, -500)')
-                select_duration(selections.index(s), d)
+                select_duration(selections.index(selection), day)
               end
             end
           end
@@ -50,9 +58,9 @@ class Home
              "#{num}_#{day}_duration_#{response}']").click
       end
 
-      def day
-        @day ||= ['monday', 'tuesday', 'wednesday', 'thursday', 'friday',
-                  'saturday', 'sunday'].sample(3)
+      def days
+        @days ||= ['monday', 'tuesday', 'wednesday', 'thursday', 'friday',
+                   'saturday', 'sunday'].sample(3)
       end
     end
   end

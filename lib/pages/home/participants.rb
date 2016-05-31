@@ -34,5 +34,14 @@ class Home
         has_text? "You have #{num} item on your to-do list"
       end
     end
+
+    def has_completed_todo_items?
+      has_css?('.complete', text: "Participant's #2 assignment (',')")
+    end
+
+    def has_incomplete_items_todo?
+      has_css?('.not-complete', text: "Participant's #1 assignment (',')") &&
+        has_css?('.not-complete', text: 'Complete Exercise Log')
+    end
   end
 end
