@@ -76,9 +76,13 @@ def participant_3
   UserDashboard::User.new(preload_pt_103)
 end
 
+def pt_3
+  ParticipantHome::Participant.new(preload_pt_103)
+end
+
 def video
   UserDashboard::Videos.new(
-    video_url: 'fake/url/',
+    video_url: 'https://vimeo.com/164554825',
     title: 'New Video',
     description: 'Video description',
     resource: 'Video resource'

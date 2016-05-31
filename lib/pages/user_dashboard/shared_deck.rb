@@ -22,6 +22,7 @@ module UserDashboard
       card_type = @deck_type == 'picture' ? 'Flash' : @deck_type.capitalize
       click_on "Add a new #{card_type} card"
       within('#modal') do
+        sleep(0.25)
         yield
         click_on 'Save'
       end

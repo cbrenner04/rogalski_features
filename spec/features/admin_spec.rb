@@ -90,6 +90,13 @@ feature 'Admin' do
     participant_3.sign_in
     participant_video.open
     expect(participant_video).to be_present
-    # complete video and check for data
+
+    # watch video and check for data
+    participant_video.play
+    pt_3.sign_out
+    user.sign_in
+    video.open_views
+
+    expect(video).to have_view_data
   end
 end

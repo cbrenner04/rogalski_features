@@ -32,5 +32,15 @@ module UserDashboard
     def present?
       [@video_url, @title].all? { |i| has_css?('tr', text: i) }
     end
+
+    def open_views
+      find('.sidebar-nav').find('a', text: 'Video views').click
+    end
+
+    def has_view_data?
+      has_text?('1 video view') &&
+        has_css?('tr',
+                 text: "#{@title} #{Time.now.strftime('%B %d, %Y %H:%M')}")
+    end
   end
 end
