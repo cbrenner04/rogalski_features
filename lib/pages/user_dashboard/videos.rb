@@ -1,4 +1,4 @@
-class Dashboard
+module UserDashboard
   # page object for videos page
   class Videos
     include Capybara::DSL
@@ -17,7 +17,7 @@ class Dashboard
     def assign
       find('legend', text: 'Assign videos').click
       click_on 'Add a new Video'
-      sleep(1)
+      sleep(0.25)
       within('.modal') do
         fill_in 'video[url]', with: @video_url
         fill_in 'video[title]', with: @title
@@ -25,12 +25,12 @@ class Dashboard
         fill_in 'video[resource]', with: @resource
         click_on 'Save'
       end
-      sleep(1)
+      sleep(0.5)
       click_on 'Save'
     end
 
     def present?
-      [@video_url, @title].each { |i| has_css?('tr', text: i) }
+      [@video_url, @title].all? { |i| has_css?('tr', text: i) }
     end
   end
 end

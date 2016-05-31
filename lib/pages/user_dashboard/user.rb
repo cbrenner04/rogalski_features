@@ -1,6 +1,6 @@
-class Dashboard
+module UserDashboard
   # page object for Users
-  class Users
+  class User
     include Capybara::DSL
 
     def initialize(user)
@@ -48,11 +48,11 @@ class Dashboard
     end
 
     def assert_on_page
-      has_css?('h1', text: 'List of Users')
+      find('h1', text: 'List of Users')
     end
 
     def present?
-      [@email, @display_name, @study_id].each do |text|
+      [@email, @display_name, @study_id].all? do |text|
         has_css?('tr', text: text)
       end
     end
@@ -71,9 +71,9 @@ class Dashboard
 
     def make_admin
       find('legend', text: 'Make admin').click
-      sleep(1)
+      sleep(0.5)
       check 'Is admin'
-      sleep(1)
+      sleep(0.5)
     end
 
     def create_admin
@@ -98,15 +98,15 @@ class Dashboard
     end
 
     def has_assignment?
-      find('.well', text: @assignment)
+      has_css?('.well', text: @assignment)
     end
 
     def has_session?
-      find('.well', text: @session)
+      has_css?('.well', text: @session)
     end
 
     def has_video?
-      find('.well', text: @video)
+      has_css?('.well', text: @video)
     end
 
     def open_responses

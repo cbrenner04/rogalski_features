@@ -1,5 +1,5 @@
-class Dashboard
-  class Users
+module UserDashboard
+  module Users
     # page object for user assignments page
     class Assignments
       include Capybara::DSL
@@ -35,11 +35,11 @@ class Dashboard
       end
 
       def present?
-        [@participant, @title].each { |i| has_css?('tr', text: i) }
         pt_row = find('tr', text: @user)
-        pt_row.has_css?('.badge-success')
-        pt_row.has_css?('td', text: 'new')
-        pt_row.has_css?('.completed_field', text: '‒')
+        [@participant, @title].all? { |text| has_css?('tr', text: text) } &&
+          pt_row.has_css?('.label-success') &&
+          pt_row.has_css?('td', text: 'new') &&
+          pt_row.has_css?('.completed_field', text: '‒')
       end
     end
   end

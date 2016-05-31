@@ -1,5 +1,5 @@
-class Dashboard
-  class Users
+module UserDashboard
+  module Users
     # page object for Responses page
     class Responses
       include Capybara::DSL
@@ -11,9 +11,7 @@ class Dashboard
       end
 
       def present?
-        [@user, @card, @answer].each do |i|
-          find('tr', text: i)
-        end
+        [@user, @card, @answer].all? { |i| has_css?('tr', text: i) }
       end
     end
   end

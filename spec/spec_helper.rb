@@ -11,12 +11,14 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = [:should, :expect]
   end
+  config.example_status_persistence_file_path = 'spec/examples.txt'
+  config.run_all_when_everything_filtered = true
   config.profile_examples = 10
 end
 
 # Capybara configuration options
 Capybara.configure do |config|
-  config.default_max_wait_time = 5
+  config.default_max_wait_time = 1
   config.register_driver :selenium do |app|
     profile = Selenium::WebDriver::Firefox::Profile.new
     profile['media.navigator.permission.disabled'] = true

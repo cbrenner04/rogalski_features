@@ -3,3 +3,4 @@
 spec/env.rb
 spec/screenshots/
 spec/reports/
+spec/examples.txt

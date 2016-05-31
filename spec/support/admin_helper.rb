@@ -1,38 +1,28 @@
 # filename: ./spec/support/admin_helper.rb
 
-require './lib/pages/dashboard'
-require './lib/pages/home'
-require './lib/pages/dashboard/users'
-require './lib/pages/dashboard/videos'
-require './lib/pages/dashboard/users/assignments'
-require './lib/pages/dashboard/users/sessions'
-require './lib/pages/home/participants'
-require './lib/pages/home/participants/exercises'
-require './lib/pages/home/participants/sessions'
-require './lib/pages/home/participants/videos'
-
-def dashboard
-  @dashboard ||= Dashboard.new
-end
+require './lib/pages/user_dashboard/user'
+require './lib/pages/user_dashboard/videos'
+require './lib/pages/user_dashboard/users/assignments'
+require './lib/pages/user_dashboard/users/sessions'
+require './lib/pages/participant_home/participant'
+require './lib/pages/participant_home/participants/exercises'
+require './lib/pages/participant_home/participants/sessions'
+require './lib/pages/participant_home/participants/videos'
 
 def user
-  Dashboard::Users.new(generic_admin)
+  UserDashboard::User.new(generic_admin)
 end
 
 def add_new_user
-  @add_new_user ||= Dashboard::Users::AddNew.new
-end
-
-def home
-  @home ||= Home.new
+  @add_new_user ||= UserDashboard::Users::AddNew.new
 end
 
 def new_admin
-  Dashboard::Users.new(email: 'fake@example.com', password: 'password')
+  UserDashboard::User.new(email: 'fake@example.com', password: 'password')
 end
 
 def new_participant
-  Dashboard::Users.new(
+  UserDashboard::User.new(
     email: 'participant_1@example.com',
     display_name: 'Participant 1',
     password: 'password',
@@ -43,7 +33,7 @@ def new_participant
 end
 
 def new_assignment
-  Dashboard::Users::Assignments.new(
+  UserDashboard::Users::Assignments.new(
     title: 'New assignment',
     user: 'preload_pt_101',
     instructions: 'Assignment Body'
@@ -51,45 +41,43 @@ def new_assignment
 end
 
 def participant_1
-  Dashboard::Users.new(preload_pt_101)
+  UserDashboard::User.new(preload_pt_101)
 end
 
 def participant_exercise
-  Home::Participants::Exercises.new(
+  ParticipantHome::Participants::Exercises.new(
     title: 'New assignment',
     status: 'not-complete'
   )
 end
 
 def participant_2
-  Dashboard::Users.new(preload_pt_102)
+  UserDashboard::User.new(preload_pt_102)
 end
 
 def session
-  Dashboard::Users::Sessions.new(
+  UserDashboard::Users::Sessions.new(
     participant: 'preload_pt_102',
     title: 'New session',
-    start_date: Date.today + 1,
-    start_time: Time.now,
-    end_date: Date.today + 1,
-    end_time: Time.now + (60 * 60),
+    start_time: Time.now + (1 * 60 * 60 * 24),
+    end_time: Time.now + (1 * 60 * 60 * 24) + (1 * 60 * 60),
     instructions: 'Session Instructions'
   )
 end
 
 def participant_session
-  Home::Participants::Sessions.new(
+  ParticipantHome::Participants::Sessions.new(
     title: 'New session',
     instructions: 'Session Instructions'
   )
 end
 
 def participant_3
-  Dashboard::Users.new(preload_pt_103)
+  UserDashboard::User.new(preload_pt_103)
 end
 
 def video
-  Dashboard::Videos.new(
+  UserDashboard::Videos.new(
     video_url: 'fake/url/',
     title: 'New Video',
     description: 'Video description',
@@ -98,7 +86,7 @@ def video
 end
 
 def participant_video
-  Home::Participants::Videos.new(
+  ParticipantHome::Participants::Videos.new(
     title: 'New Video',
     description: 'Video description'
   )

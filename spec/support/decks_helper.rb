@@ -1,41 +1,27 @@
 # filename: ./spec/support/decks_helper.rb
 
-require './lib/pages/dashboard'
-require './lib/pages/home'
-require './lib/pages/dashboard/users'
-require './lib/pages/dashboard/audio_decks'
-require './lib/pages/dashboard/multisyllabic_decks'
-require './lib/pages/dashboard/picture_decks'
-require './lib/pages/dashboard/users/responses'
-require './lib/pages/home/participants'
-require './lib/pages/home/participants/exercises'
-
-def admin
-  @admin ||= Dashboard::Users.new(generic_admin)
-end
+require './lib/pages/user_dashboard/user'
+require './lib/pages/user_dashboard/audio_decks'
+require './lib/pages/user_dashboard/multisyllabic_decks'
+require './lib/pages/user_dashboard/picture_decks'
+require './lib/pages/user_dashboard/users/responses'
+require './lib/pages/participant_home/participant'
+require './lib/pages/participant_home/participants/exercises'
 
 def participant_4
-  @participant_4 ||= Home::Participants.new(preload_pt_104)
+  @participant_4 ||= ParticipantHome::Participant.new(preload_pt_104)
 end
 
 def participant_5
-  @participant_5 ||= Home::Participants.new(preload_pt_105)
+  @participant_5 ||= ParticipantHome::Participant.new(preload_pt_105)
 end
 
 def participant_6
-  @participant_6 ||= Home::Participants.new(preload_pt_106)
-end
-
-def dashboard
-  @dashboard ||= Dashboard.new
-end
-
-def home
-  @home ||= Home.new
+  @participant_6 ||= ParticipantHome::Participant.new(preload_pt_106)
 end
 
 def audio_deck
-  Dashboard::AudioDecks.new(
+  UserDashboard::AudioDecks.new(
     title: 'First audio deck',
     user: 'preload_pt_104',
     instructions: 'Assignment Body',
@@ -47,7 +33,7 @@ def audio_deck
 end
 
 def multi_deck
-  Dashboard::MultiDecks.new(
+  UserDashboard::MultiDecks.new(
     title: 'First multisyllabic deck',
     user: 'preload_pt_105',
     instructions: 'Multisyllabic Deck Instructions',
@@ -57,7 +43,7 @@ def multi_deck
 end
 
 def picture_deck
-  Dashboard::PictureDecks.new(
+  UserDashboard::PictureDecks.new(
     title: 'First picture deck',
     user: 'preload_pt_106',
     instructions: 'Picture Deck Instructions',
@@ -69,7 +55,7 @@ def picture_deck
 end
 
 def participant_audio_exercise
-  Home::Participants::Exercises.new(
+  ParticipantHome::Participants::Exercises.new(
     status: 'not-complete',
     title: 'First audio deck',
     instructions: 'Assignment Body',
@@ -80,7 +66,7 @@ def participant_audio_exercise
 end
 
 def participant_multi_exercise
-  Home::Participants::Exercises.new(
+  ParticipantHome::Participants::Exercises.new(
     status: 'not-complete',
     title: 'First multisyllabic deck',
     instructions: 'Multisyllabic Deck Instructions',
@@ -90,7 +76,7 @@ def participant_multi_exercise
 end
 
 def participant_picture_exercise
-  Home::Participants::Exercises.new(
+  ParticipantHome::Participants::Exercises.new(
     status: 'not-complete',
     title: 'First picture deck',
     instructions: 'Picture Deck Instructions',
@@ -101,7 +87,7 @@ def participant_picture_exercise
 end
 
 def audio_response
-  Dashboard::Users::Responses.new(
+  UserDashboard::Users::Responses.new(
     user: 'preload_pt_104',
     card: 'First',
     answer: 'Audio Answer [Download]'
@@ -109,7 +95,7 @@ def audio_response
 end
 
 def multi_response
-  Dashboard::Users::Responses.new(
+  UserDashboard::Users::Responses.new(
     user: 'preload_pt_105',
     card: 'antidisestablishmentarianism',
     answer: 'Multisyllabic Answer [Download]'
@@ -117,7 +103,7 @@ def multi_response
 end
 
 def picture_response
-  Dashboard::Users::Responses.new(
+  UserDashboard::Users::Responses.new(
     user: 'preload_pt_106',
     card: 'First flash card answer',
     answer: 'Example Answer'

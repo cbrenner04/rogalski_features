@@ -1,5 +1,5 @@
-class Home
-  class Participants
+module ParticipantHome
+  module Participants
     # page object for Contact/Help page
     class ContactHelp
       include Capybara::DSL
@@ -12,7 +12,7 @@ class Home
         contact_text = ['Contact The Study',
                         'communicationbridge@northwestern.edu',
                         '(312) 503-4238', 'Watch Introduction']
-        contact_text.each { |c| has_text? c }
+        contact_text.all? { |text| has_text? text }
       end
 
       def play_video

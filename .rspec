@@ -1,5 +1,6 @@
 --require env.rb
 --require spec_helper
+--require support/feature_helper
 --format documentation
 --format progress
 --out 'spec/reports/<%= Time.now.strftime('%m.%d.%y_%H.%M.%S') %>.txt'

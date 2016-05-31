@@ -1,5 +1,5 @@
-class Home
-  class Participants
+module ParticipantHome
+  module Participants
     # page object for Exercises
     class Exercises
       include Capybara::DSL
@@ -28,8 +28,8 @@ class Home
 
       def has_instructions?
         within('.col.half.last') do
-          find('.heading', text: @title)
-          find('.wrapper', text: @instructions)
+          has_css?('.heading', text: @title) &&
+            has_css?('.wrapper', text: @instructions)
         end
       end
 
@@ -39,31 +39,28 @@ class Home
       end
 
       def audio_exercise?
-        find('button', text: 'Hint')
+        has_css?('button', text: 'Hint')
       end
 
       def multi_exercise?
-        find('h1', text: @word)
-        find('h2', text: @spelling)
+        has_css?('h1', text: @word) && has_css?('h2', text: @spelling)
       end
 
       def picture_exercise?
-        find('input[placeholder = "Enter the name here"]')
+        has_css?('input[placeholder = "Enter the name here"]')
       end
 
       def has_correct_audio_hints?
-        [@hint_1, @hint_2, @hint_3].each do |i|
+        [@hint_1, @hint_2, @hint_3].all? do |i|
           click_on 'Hint'
-          has_no_css?('.hidden', text: i)
-          find('.hint', text: i)
+          has_no_css?('.hidden', text: i) && has_css?('.hint', text: i)
         end
       end
 
       def has_correct_picture_hints?
-        [@hint_1, @hint_2, @hint_3].each do |i|
+        [@hint_1, @hint_2, @hint_3].all? do |i|
           click_on 'Get a hint'
-          has_no_css?('.hidden', text: i)
-          find('.hint', text: i)
+          has_no_css?('.hidden', text: i) && has_css?('.hint', text: i)
         end
       end
 

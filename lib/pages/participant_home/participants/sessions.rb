@@ -1,5 +1,5 @@
-class Home
-  class Participants
+module ParticipantHome
+  module Participants
     # page object for Participants Sessions
     class Sessions
       include Capybara::DSL
@@ -15,8 +15,8 @@ class Home
 
       def present?
         within('.simplemodal-container') do
-          has_css?('h1', text: @title)
-          has_css?('h3', text: @instructions)
+          has_css?('h1', text: @title) &&
+            has_css?('h3', text: @instructions)
         end
       end
     end

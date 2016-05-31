@@ -1,6 +1,6 @@
-class Home
+module ParticipantHome
   # page object for Participants
-  class Participants
+  class Participant
     include Capybara::DSL
 
     def initialize(participant)
@@ -28,11 +28,8 @@ class Home
     end
 
     def has_todo_list_count?(num)
-      if num > 1
-        has_text? "You have #{num} items on your to-do list"
-      else
-        has_text? "You have #{num} item on your to-do list"
-      end
+      item_key = num == 1 ? 'item' : 'items'
+      has_text? "You have #{num} #{item_key} on your to-do list"
     end
 
     def has_completed_todo_items?

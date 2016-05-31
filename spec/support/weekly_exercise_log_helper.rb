@@ -1,22 +1,17 @@
 # filename: ./spec/support/weekly_exercise_log_helper.rb
 
-require './lib/pages/dashboard/users'
-require './lib/pages/dashboard/weekly_exercise_logs'
-require './lib/pages/home/participants'
-require './lib/pages/home/participants/weekly_log'
-
-def admin
-  @admin ||= Dashboard::Users.new(generic_admin)
-end
+require './lib/pages/user_dashboard/weekly_exercise_logs'
+require './lib/pages/participant_home/participant'
+require './lib/pages/participant_home/participants/weekly_log'
 
 def participant_7
-  @participant_7 ||= Home::Participants.new(preload_pt_107)
+  @participant_7 ||= ParticipantHome::Participant.new(preload_pt_107)
 end
 
 def pt_weekly_log
-  Home::Participants::WeeklyLog.new
+  ParticipantHome::Participants::WeeklyLog.new
 end
 
 def user_weekly_log
-  Dashboard::WeeklyExerciseLogs.new('preload_pt_107')
+  UserDashboard::WeeklyExerciseLogs.new('preload_pt_107')
 end

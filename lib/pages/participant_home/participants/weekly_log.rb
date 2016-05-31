@@ -1,5 +1,5 @@
-class Home
-  class Participants
+module ParticipantHome
+  module Participants
     # page object for weekly exercise logs
     class WeeklyLog
       include Capybara::DSL

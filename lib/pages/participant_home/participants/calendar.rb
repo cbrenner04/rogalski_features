@@ -1,5 +1,5 @@
-class Home
-  class Participants
+module ParticipantHome
+  module Participants
     # page object for the calendar page
     class Calendar
       include Capybara::DSL
@@ -27,8 +27,8 @@ class Home
       end
 
       def has_day?
-        has_css?('h2', text: Date.today.strftime('%b %-d, %Y'))
-        has_css?('.fc-day-header', text: Date.today.strftime('%A'))
+        has_css?('h2', text: Date.today.strftime('%b %-d, %Y')) &&
+          has_css?('.fc-day-header', text: Date.today.strftime('%A'))
       end
 
       def switch_to_month
@@ -92,14 +92,14 @@ class Home
 
       def has_next_day?
         next_day = Date.today + 1
-        has_css?('h2', text: next_day.strftime('%b %-d, %Y'))
-        has_css?('.fc-day-header', text: next_day.strftime('%A'))
+        has_css?('h2', text: next_day.strftime('%B %-d, %Y')) &&
+          has_css?('.fc-day-header', text: next_day.strftime('%A'))
       end
 
       def has_previous_day?
         prev_day = Date.today - 1
-        has_css?('h2', text: prev_day.strftime('%b %-d, %Y'))
-        has_css?('.fc-day-header', text: prev_day.strftime('%A'))
+        has_css?('h2', text: prev_day.strftime('%B %-d, %Y')) &&
+          has_css?('.fc-day-header', text: prev_day.strftime('%A'))
       end
 
       private
