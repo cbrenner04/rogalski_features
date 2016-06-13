@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module ParticipantHome
   module Participants
     # page object for connect page

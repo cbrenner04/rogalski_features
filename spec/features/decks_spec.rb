@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # filename: ./spec/features/decks_spec.rb
 
 require './spec/support/decks_helper.rb'

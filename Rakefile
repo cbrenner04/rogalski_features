@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # filename: Rakefile
 
 # load development version of app locally with selenium_fixtures
@@ -9,6 +10,6 @@ task :load_app_local do
   Dir.chdir('../rogalski/') do
     system('rake db:drop db:create db:migrate')
     system('rake seed_selenium:fixtures')
-    system('rails s')
+    system('rails s -p 8000')
   end
 end

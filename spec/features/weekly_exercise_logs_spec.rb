@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # filename: ./spec/features/weekly_exercise_logs_spec.rb
 
 require './spec/support/weekly_exercise_log_helper'

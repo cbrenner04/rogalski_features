@@ -1,5 +1,7 @@
+# frozen_string_literal: true
 # filename: ./spec/support/admin_helper.rb
 
+require './lib/pages/user_dashboard/login_events'
 require './lib/pages/user_dashboard/user'
 require './lib/pages/user_dashboard/videos'
 require './lib/pages/user_dashboard/users/assignments'
@@ -94,4 +96,8 @@ def participant_video
     title: 'New Video',
     description: 'Video description'
   )
+end
+
+def login_events
+  UserDashboard::LoginEvents.new
 end

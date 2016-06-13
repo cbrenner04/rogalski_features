@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # filename: ./spec/features/admin_spec.rb
 
 require './spec/support/admin_helper.rb'
@@ -98,5 +99,19 @@ feature 'Admin' do
     video.open_views
 
     expect(video).to have_view_data
+  end
+end
+
+feature 'Admin check data' do
+  scenario 'Admin checks login events' do
+    user.sign_in
+    login_events.open
+    num_events_1 = login_events.total_events
+    user.log_out
+
+    user.sign_in
+    login_events.open
+    num_events_2 = login_events.total_events
+    expect(num_events_2 - num_events_1).to eq(1)
   end
 end

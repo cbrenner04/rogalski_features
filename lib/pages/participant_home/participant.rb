@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module ParticipantHome
   # page object for Participants
   class Participant

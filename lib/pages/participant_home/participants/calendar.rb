@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module ParticipantHome
   module Participants
     # page object for the calendar page
@@ -27,7 +28,7 @@ module ParticipantHome
       end
 
       def has_day?
-        has_css?('h2', text: Date.today.strftime('%b %-d, %Y')) &&
+        has_css?('h2', text: Date.today.strftime('%B %-d, %Y')) &&
           has_css?('.fc-day-header', text: Date.today.strftime('%A'))
       end
 

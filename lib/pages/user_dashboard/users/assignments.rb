@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module UserDashboard
   module Users
     # page object for user assignments page

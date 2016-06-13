@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # filename: ./spec/support/weekly_exercise_log_helper.rb
 
 require './lib/pages/user_dashboard/weekly_exercise_logs'

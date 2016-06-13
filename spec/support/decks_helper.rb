@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # filename: ./spec/support/decks_helper.rb
 
 require './lib/pages/user_dashboard/user'

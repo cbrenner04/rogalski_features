@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module UserDashboard
   # page object for Users
   class User

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Page object for the home Page
 class Home
   include Capybara::DSL

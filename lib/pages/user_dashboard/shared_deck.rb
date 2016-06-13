@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require './lib/pages/user_dashboard/users/assignments'
 
 module UserDashboard

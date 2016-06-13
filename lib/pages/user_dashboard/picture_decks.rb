@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require './lib/pages/user_dashboard/shared_deck'
 
 module UserDashboard

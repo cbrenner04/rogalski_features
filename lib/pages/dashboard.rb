@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Page object for the Dashboard
 class Dashboard
   include Capybara::DSL
