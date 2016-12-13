@@ -4,10 +4,11 @@ This test suite is to test
 [Communication Bridge](https://github.com/cbitstech/rogalski).
 
 You will need the above repo, cloned and up-to-date locally. Within that
-directory, switch to the gemset used in this suite:
+directory, switch to the gemset used in this suite and bundle:
 
 ```
 rvm use 2.3.0@selenium48
+bundle install
 ```
 
 Within the `rogalski_features` directory, start the app:
