@@ -21,6 +21,10 @@ def participant_6
   @participant_6 ||= ParticipantHome::Participant.new(preload_pt_106)
 end
 
+def participant_201
+  @participant_201 ||= ParticipantHome::Participant.new(preload_pt_201)
+end
+
 def audio_deck
   UserDashboard::AudioDecks.new(
     title: 'First audio deck',
@@ -40,6 +44,14 @@ def multi_deck
     instructions: 'Multisyllabic Deck Instructions',
     word: 'antidisestablishmentarianism',
     spelling: 'an-tee-dis-uh-stab-lish-muh n-tair-ee-uh-niz-uh m'
+  )
+end
+
+def multi_deck_2
+  UserDashboard::MultiDecks.new(
+    title: 'multisyllabic deck',
+    user: 'preload_pt_201',
+    instructions: 'Do it!'
   )
 end
 
@@ -73,6 +85,14 @@ def participant_multi_exercise
     instructions: 'Multisyllabic Deck Instructions',
     word: 'antidisestablishmentarianism',
     spelling: 'an-tee-dis-uh-stab-lish-muh n-tair-ee-uh-niz-uh m'
+  )
+end
+
+def participant_second_multi_exercise
+  ParticipantHome::Participants::Exercises.new(
+    status: 'not-complete',
+    title: 'multisyllabic deck',
+    instructions: 'Do it!'
   )
 end
 

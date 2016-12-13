@@ -65,6 +65,33 @@ feature 'Decks' do
     expect(multi_response).to be_present
   end
 
+  scenario 'User completes an audio deck with more than 6 slides' do
+    admin.sign_in
+    multi_deck_2.open
+    multi_deck_2.edit
+    multi_deck_2.assign
+    admin.log_out
+
+    participant_201.sign_in
+    expect(participant_second_multi_exercise).to be_present
+
+    participant_second_multi_exercise.select_exercise
+    expect(participant_second_multi_exercise).to have_instructions
+    participant_second_multi_exercise.start
+    7.times do
+      participant_second_multi_exercise.start_audio_record
+      sleep(2)
+      participant_second_multi_exercise.stop_audio_record
+      participant_second_multi_exercise.next
+    end
+    participant_second_multi_exercise.start_audio_record
+    sleep(2)
+    participant_second_multi_exercise.stop_audio_record
+    participant_second_multi_exercise.finish
+
+    expect(home).to be_visible
+  end
+
   scenario 'Admin creates a picture deck' do
     admin.sign_in
     picture_deck.open

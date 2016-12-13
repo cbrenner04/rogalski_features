@@ -28,7 +28,7 @@ Capybara.configure do |config|
   end
   config.default_driver = :selenium
   config.page.driver.browser.manage.window.resize_to(1280, 743)
-  config.save_and_open_page_path = 'spec/screenshots/'
+  config.save_path = "#{ENV['Path']}/rogalski_features/spec/screenshots/"
 end
 
 # Capybara-screenshot configuration options

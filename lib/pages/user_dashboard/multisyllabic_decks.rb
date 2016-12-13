@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require './lib/pages/user_dashboard/shared_deck'
+require './lib/pages/user_dashboard/users/assignments'
 
 module UserDashboard
   # page object for multisyllabic decks
@@ -24,6 +25,35 @@ module UserDashboard
         fill_in 'multisyllabic_card[phonetic_transcription]',
                 with: @spelling
       end
+    end
+
+    def edit
+      sleep(1)
+      visit "#{ENV['Base_URL']}/admin/multisyllabic_deck/1/edit"
+    end
+
+    def assign
+      click_on 'Add a new Assignment'
+      sleep(1)
+      find('#multisyllabic_deck_assignment_attributes_title').set(@title)
+      execute_script('window.scrollBy(0,250)')
+      first('.dropdown-toggle').click
+      find('a', text: @user).click
+      within_frame(find('.wysihtml5-sandbox')) do
+        find('body').set(@instructions)
+      end
+      sleep(0.5)
+      click_on 'Save'
+    end
+
+    private
+
+    def new_assignment
+      @new_assignment ||= UserDashboard::Users::Assignments.new(
+        user: @user,
+        instructions: @instructions,
+        title: @title
+      )
     end
   end
 end

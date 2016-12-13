@@ -77,6 +77,10 @@ module ParticipantHome
         click_on 'Press when your description is complete.'
       end
 
+      def next
+        click_on 'Next Word'
+      end
+
       def answer
         find('input[placeholder = "Enter the name here"]').set('Example Answer')
         click_on 'Answer'
